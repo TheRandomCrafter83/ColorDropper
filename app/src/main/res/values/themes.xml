@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.ColorDropper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorControlHighlight">@color/color_control_highlight</item>
+        <item name="colorControlNormal">@color/color_control_normal</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
+        <item name="android:navigationBarColor" tools:targetApi="1">@color/workspace_bottom</item>
+        <!-- Customize your theme here. -->
+        <item name="android:colorAccent">@color/yellow</item>
+        <item name="tabIndicatorColor">@color/yellow</item>
+        <item name="tabBackground">@color/primary</item>
+        <item name="tabSelectedTextColor">@color/yellow</item>
+        <item name="tabTextColor">@color/yellow</item>
+    </style>
+
+</resources>

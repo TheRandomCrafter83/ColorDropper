@@ -1,0 +1,8 @@
+<resources>
+    <string	name="app_name"	translatable="false">Color Dropper</string>
+    <string name="fragment1">Color Picker</string>
+    <string name="fragment2">Favorite Colors</string>
+    <string name="def_color">#00000000</string>
+    <string name="app_icon">App Icon</string>
+    <string name="imgView">Image Preview</string>
+</resources>

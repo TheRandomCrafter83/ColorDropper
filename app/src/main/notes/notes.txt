@@ -1,0 +1,1 @@
+Add internet connection status. If not connected to internet, hide the load url icon.
