@@ -5,4 +5,8 @@
     <string name="def_color">#00000000</string>
     <string name="app_icon">App Icon</string>
     <string name="imgView">Image Preview</string>
+    <string name="iv_browse">Browse Gallery</string>
+    <string name="iv_web">Enter image web address</string>
+    <string name="iv_camera">Take a picture</string>
+    <string name="iv_screenshot">Take a screenshot</string>
 </resources>
