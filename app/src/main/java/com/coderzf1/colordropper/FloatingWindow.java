@@ -1,5 +1,5 @@
 package com.coderzf1.colordropper;
-//test
+
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
