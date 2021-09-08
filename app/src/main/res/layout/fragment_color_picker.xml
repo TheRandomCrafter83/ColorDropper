@@ -85,11 +85,12 @@
                 android:src="@drawable/ic_baseline_local_see_24"
                 android:tint="@color/yellow" />
 
-            <ImageView
+            <ImageButton
                 android:id="@+id/iv_screenshot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:background="#00ffffff"
                 android:contentDescription="@string/iv_screenshot"
                 android:scaleType="fitCenter"
                 android:src="@drawable/screenshot"
