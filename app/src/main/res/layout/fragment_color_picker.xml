@@ -25,10 +25,9 @@
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_launcher_foreground"
                 android:contentDescription="@string/imgView"
-                android:visibility="gone" />
+                android:scaleType="fitCenter"
+                android:visibility="visible" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
@@ -54,41 +53,41 @@
 
             <ImageButton
                 android:id="@+id/iv_browse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:background="#00ffffff"
                 android:contentDescription="@string/iv_browse"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_folder_open_24"
-                android:tint="@color/yellow" />
+                app:tint="@color/yellow" />
 
             <ImageButton
                 android:id="@+id/iv_web"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:background="#00ffffff"
                 android:contentDescription="@string/iv_web"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_language_24"
-                android:tint="@color/yellow" />
+                app:tint="@color/yellow" />
 
             <ImageButton
                 android:id="@+id/iv_camera"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:background="#00ffffff"
                 android:contentDescription="@string/iv_camera"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_baseline_local_see_24"
-                android:tint="@color/yellow" />
+                app:tint="@color/yellow" />
 
             <ImageButton
                 android:id="@+id/iv_screenshot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:background="#00ffffff"
                 android:contentDescription="@string/iv_screenshot"

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AlertDialog;
 
 public class InputDialog {
@@ -35,7 +36,7 @@ public class InputDialog {
     }
 
 
-    public void showInputDialog (final String message, final String title, final String default_text, final Color dialogBgColor, final Color dialogTextColor) {
+    public void showInputDialog (final String message, final String title, final String default_text, @ColorInt final int dialogBgColor,@ColorInt final int dialogTextColor) {
         android.app.AlertDialog dlg;
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
         if (!title.equals("")){
@@ -49,7 +50,7 @@ public class InputDialog {
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dlgLayout.setLayoutParams(params);
         dlgLayout.setOrientation(LinearLayout.VERTICAL);
-        dlgLayout.setBackgroundColor(dialogBgColor.toArgb());
+        dlgLayout.setBackgroundColor(dialogBgColor);
         final EditText userInput = new EditText(context);
         if (!TextUtils.isEmpty(default_text)){
             userInput.setText(default_text);
@@ -89,16 +90,16 @@ public class InputDialog {
 
         final TextView txtMessage = new TextView(context);
         if (!message.equals("")){
-            int r = Color.red(dialogTextColor.toArgb());
-            int g = Color.green(dialogTextColor.toArgb());
-            int b = Color.blue(dialogTextColor.toArgb());
+            int r = Color.red(dialogTextColor);
+            int g = Color.green(dialogTextColor);
+            int b = Color.blue(dialogTextColor);
             String hex = String.format("#%02x%02x%02x", r, g, b);
             String messageHtml = "<font color='" + hex + "'>" + message + "</font>";
             txtMessage.setText(Html.fromHtml(messageHtml, Html.FROM_HTML_MODE_COMPACT));
         }else{
             builder.setMessage("Enter some text.");
         }
-        txtMessage.setTextColor(dialogTextColor.toArgb());
+        txtMessage.setTextColor(dialogTextColor);
         txtMessage.setTextSize(18f);
         txtMessage.setLayoutParams(tlp);
 
@@ -106,7 +107,7 @@ public class InputDialog {
         txtTitle.setLayoutParams(tlp);
         txtTitle.setPadding(m/2,m/2,m/2,m/2);
         txtTitle.setText(title);
-        txtTitle.setTextColor(dialogTextColor.toArgb());
+        txtTitle.setTextColor(dialogTextColor);
         txtTitle.setTypeface(txtTitle.getTypeface(),android.graphics.Typeface.BOLD);
         txtTitle.setTextSize(20f);
 
@@ -137,12 +138,12 @@ public class InputDialog {
         dlg.show();
         gd = new android.graphics.drawable.GradientDrawable();
         gd.setCornerRadius(20);
-        gd.setColor(dialogBgColor.toArgb());
+        gd.setColor(dialogBgColor);
         gd.setStroke(2,Color.BLACK);
-        dlg.getWindow().getDecorView().getBackground().setColorFilter(new android.graphics.LightingColorFilter(0xff000000,dialogBgColor.toArgb()));
+        dlg.getWindow().getDecorView().getBackground().setColorFilter(new android.graphics.LightingColorFilter(0xff000000,dialogBgColor));
         dlg.getWindow().getDecorView().setBackground(gd);
-        dlg.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(dialogTextColor.toArgb());
-        dlg.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(dialogTextColor.toArgb());
+        dlg.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(dialogTextColor);
+        dlg.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(dialogTextColor);
     }
 
 }
