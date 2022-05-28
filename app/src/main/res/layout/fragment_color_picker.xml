@@ -1,117 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    tools:context=".FragmentColorPicker">
+    android:background="@color/workspace"
+    tools:context=".ui.colorpicker.FragmentColorPicker">
 
     <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/workspace_bottom"
-        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@color/workspace"
-            android:orientation="vertical">
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.Material.Light.ProgressBar.Large.Inverse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@drawable/progress_drawable"
+        android:indeterminateTint="@color/yellow"
+        android:progressTint="#57380B"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.493"
+        tools:visibility="gone" />
 
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:contentDescription="@string/imgView"
-                android:scaleType="fitCenter"
-                android:visibility="visible" />
+    <ImageView
+        android:id="@+id/imagePlaceHolder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription=""
+        app:layout_constraintBottom_toTopOf="@+id/iv_browse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="@android:style/Widget.Material.Light.ProgressBar.Large.Inverse"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:indeterminate="true"
-                android:indeterminateDrawable="@drawable/progress_drawable"
-                android:indeterminateTint="@color/yellow"
-                android:progressTint="#57380B"
-                android:visibility="gone"
-                tools:visibility="gone" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:contentDescription="@string/imgView"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/iv_browse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        </LinearLayout>
+    <ImageButton
+        android:id="@+id/iv_camera"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00ffffff"
+        android:contentDescription="@string/iv_camera"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_local_see_24"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_color"
+        app:layout_constraintEnd_toStartOf="@id/iv_browse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/yellow" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/workspace_bottom"
-            android:gravity="center"
-            android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/iv_browse"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00ffffff"
+        android:contentDescription="@string/iv_browse"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_folder_open_24"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_color"
+        app:layout_constraintEnd_toStartOf="@id/iv_web"
+        app:layout_constraintStart_toEndOf="@+id/iv_camera"
+        app:tint="@color/yellow" />
 
-            <ImageButton
-                android:id="@+id/iv_browse"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                android:background="#00ffffff"
-                android:contentDescription="@string/iv_browse"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_folder_open_24"
-                app:tint="@color/yellow" />
+    <ImageButton
+        android:id="@+id/iv_web"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00ffffff"
+        android:contentDescription="@string/iv_web"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_baseline_language_24"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_color"
+        app:layout_constraintEnd_toStartOf="@id/iv_screenshot"
+        app:layout_constraintStart_toEndOf="@+id/iv_browse"
+        app:tint="@color/yellow" />
 
-            <ImageButton
-                android:id="@+id/iv_web"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                android:background="#00ffffff"
-                android:contentDescription="@string/iv_web"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_language_24"
-                app:tint="@color/yellow" />
+    <ImageButton
+        android:id="@+id/iv_screenshot"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="#00ffffff"
+        android:contentDescription="@string/iv_screenshot"
+        android:scaleType="fitCenter"
+        android:src="@drawable/screenshot"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_web"
+        app:tint="@color/yellow" />
 
-            <ImageButton
-                android:id="@+id/iv_camera"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                android:background="#00ffffff"
-                android:contentDescription="@string/iv_camera"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_local_see_24"
-                app:tint="@color/yellow" />
-
-            <ImageButton
-                android:id="@+id/iv_screenshot"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_margin="8dp"
-                android:background="#00ffffff"
-                android:contentDescription="@string/iv_screenshot"
-                android:scaleType="fitCenter"
-                android:src="@drawable/screenshot"
-                app:tint="@color/yellow" />
-
-        </LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardview_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp">
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/rounded_rect"
+
             android:gravity="center"
             android:padding="16dp"
             android:text="@string/def_color"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            app:drawableEndCompat="@drawable/ic_is_not_favorite"
+            app:drawableStartCompat="@drawable/ic_copy"
+            android:drawablePadding="16dp"
+            android:drawableTint="@color/workspace"
+            />
 
+    </com.google.android.material.card.MaterialCardView>
 
-    </LinearLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,72 +1,39 @@
 package com.coderzf1.colordropper;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
-import com.google.android.material.tabs.TabLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+
+import com.coderzf1.colordropper.databinding.ActivityMainBinding;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
-    TabLayout tabLayout;
-    Fragment currentFragment = null;
+    ActivityMainBinding binding;
+
+    String[] tabTitles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitleTextColor(ResourcesCompat.getColor(getResources(),R.color.yellow,null));
-        setSupportActionBar(toolbar);
-        initializeApp();
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.toolbar.setTitleTextColor(ResourcesCompat.getColor(getResources(),R.color.yellow,null));
+        setSupportActionBar(binding.toolbar);
+        initialize();
     }
 
-    public void initializeApp(){
-        Fragment selFragment;
-        selFragment = new FragmentColorPicker();
-        currentFragment = selFragment;
-        FragmentManager fm  = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.replace(R.id.fragment,selFragment);
-        transaction.commit();
-        tabLayout = findViewById(R.id.tabLayout);
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            Fragment selFragment;
-
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                FragmentManager fm  = getSupportFragmentManager();
-                FragmentTransaction transaction = fm.beginTransaction();
-                transaction.hide(currentFragment);
-                switch (tab.getPosition()){
-                    case 0:
-                        selFragment = new FragmentColorPicker();
-                        currentFragment = selFragment;
-                        break;
-                    case 1:
-                        selFragment = new FragmentFavoriteColors();
-                        currentFragment = selFragment;
-                        break;
-                }
-
-                transaction.replace(R.id.fragment,selFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+    private void initialize(){
+        initTabTitles();
+        binding.viewPager.setUserInputEnabled(false);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(),getLifecycle());
+        binding.viewPager.setAdapter(adapter);
+        new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> tab.setText(tabTitles[position])).attach();
     }
+
+    private void initTabTitles(){
+        String titles = getString(R.string.tab_titles);
+        tabTitles = titles.split(",");
+    }
+
 }

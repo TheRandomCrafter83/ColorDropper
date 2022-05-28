@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper;
+package com.coderzf1.colordropper.ui.colorpicker;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AlertDialog;
+
+import com.coderzf1.colordropper.R;
 
 public class InputDialog {
     interface InputDialogCallback{

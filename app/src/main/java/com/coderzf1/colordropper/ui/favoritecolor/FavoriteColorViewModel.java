@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper;
+package com.coderzf1.colordropper.ui.favoritecolor;
 
 import android.app.Application;
 
@@ -12,7 +12,7 @@ import com.coderzf1.colordropper.Database.ColorRepository;
 import java.util.List;
 
 public class FavoriteColorViewModel extends AndroidViewModel {
-    private ColorRepository mRepository;
+    private final ColorRepository mRepository;
     private final LiveData<List<Color>> mAllColors;
 
     public FavoriteColorViewModel(@NonNull Application application) {
@@ -21,7 +21,7 @@ public class FavoriteColorViewModel extends AndroidViewModel {
         mAllColors = mRepository.getAllColors();
     }
 
-    LiveData<List<Color>> getmAllColors(){
+    LiveData<List<Color>> getAllColors(){
         return mAllColors;
     }
 
