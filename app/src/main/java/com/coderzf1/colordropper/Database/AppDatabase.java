@@ -1,7 +1,9 @@
 package com.coderzf1.colordropper.Database;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.room.Dao;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -9,26 +11,21 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Color.class}, version = 1,exportSchema = false)
+@Database(entities = Color.class, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract Dao dao();
+    public abstract FavoriteColorsDao dao();
 
-    private static volatile AppDatabase INSTANCE;
+    private static volatile AppDatabase instance;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static AppDatabase getDatabase(final Context context){
-        if(INSTANCE == null){
-            synchronized (AppDatabase.class){
-                if(INSTANCE == null){
-                    INSTANCE = Room.databaseBuilder(
-                            context.getApplicationContext(),
-                            AppDatabase.class,
-                            "color_database")
-                            .build();
-                }
-            }
+    public static synchronized AppDatabase getInstance(Context context){
+        if(instance == null){
+            instance = Room.databaseBuilder(context.getApplicationContext(),
+                    AppDatabase.class, "color_database")
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
-        return INSTANCE;
+        return instance;
     }
 }

@@ -4,8 +4,20 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity
+@Entity(tableName = "favorite_colors")
 public class Color {
+    @PrimaryKey(autoGenerate = true)
+    private int uid;
+    @ColumnInfo(name = "color_name")
+    private final String colorName;
+    @ColumnInfo(name="color_value")
+    private final int colorValue;
+
+    public Color(String colorName, int colorValue) {
+        this.colorName = colorName;
+        this.colorValue = colorValue;
+    }
+
     public int getUid() {
         return uid;
     }
@@ -14,12 +26,11 @@ public class Color {
         this.uid = uid;
     }
 
-    @PrimaryKey(autoGenerate = true)
-    private int uid;
+    public String getColorName() {
+        return colorName;
+    }
 
-    @ColumnInfo(name = "color_name")
-    public int colorName;
-
-    @ColumnInfo(name="color_value")
-    public int colorValue;
+    public int getColorValue() {
+        return colorValue;
+    }
 }

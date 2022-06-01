@@ -1,6 +1,7 @@
 package com.coderzf1.colordropper.ui.favoritecolor.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,34 +17,52 @@ import java.util.List;
 
 public class FavoriteColorsAdapter extends RecyclerView.Adapter<FavoriteColorsAdapter.FavoriteColorsViewHolder> {
 
-    FavoriteColorsItemBinding binding;
-    LiveData<List<Color>> items;
+    List<Color> items;
+
+
 
     public static class FavoriteColorsViewHolder extends RecyclerView.ViewHolder{
-        public FavoriteColorsViewHolder(@NonNull View itemView) {
-            super(itemView);
+        private FavoriteColorsItemBinding binding;
+        public FavoriteColorsViewHolder(FavoriteColorsItemBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
+
     }
 
-    public FavoriteColorsAdapter(Context context, LiveData<List<Color>> items){
+    public FavoriteColorsAdapter(){
+
+    }
+
+    public void setItems(List<Color> items){
         this.items = items;
-        binding = FavoriteColorsItemBinding.inflate(LayoutInflater.from(context));
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public FavoriteColorsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new FavoriteColorsViewHolder(binding.getRoot());
+        FavoriteColorsItemBinding binding = FavoriteColorsItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        return new FavoriteColorsViewHolder(binding);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteColorsViewHolder holder, int position) {
-        //TODO: design the layout, then update to set values
+        Color color = items.get(position);
+        holder.binding.textViewColorName.setText(color.getColorName());
+        holder.binding.textViewHexValue.setText(String.valueOf(color.getColorValue()));
+        holder.binding.surfaceViewColorPreview.setBackgroundTintList(getColorValue(color.getColorValue()));
+    }
+
+    private ColorStateList getColorValue(int color){
+        int[][] states = new int[][]{new int[]{0}};
+        int[] colors = new int[]{color};
+        return new ColorStateList(states,colors);
     }
 
     @Override
     public int getItemCount() {
-        if (items.getValue() == null) return 0;
-        return items.getValue().size();
+        if (items == null) return 0;
+        return items.size();
     }
 }

@@ -1,10 +1,12 @@
 package com.coderzf1.colordropper.ui.favoritecolor;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.coderzf1.colordropper.Database.Color;
 import com.coderzf1.colordropper.Database.ColorRepository;
@@ -22,6 +24,7 @@ public class FavoriteColorViewModel extends AndroidViewModel {
     }
 
     LiveData<List<Color>> getAllColors(){
+        //Log.d("DebugColorsCount", "getAllColors: " + mAllColors.getValue().size());
         return mAllColors;
     }
 
@@ -32,4 +35,6 @@ public class FavoriteColorViewModel extends AndroidViewModel {
     public void delete(Color color){
         mRepository.delete(color);
     }
+
+    public void update(Color color) {mRepository.update(color);}
 }

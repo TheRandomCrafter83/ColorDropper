@@ -1,6 +1,7 @@
 package com.coderzf1.colordropper.Database;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
@@ -8,13 +9,13 @@ import java.util.List;
 
 
 public class ColorRepository {
-    private Dao dao;
-    private LiveData<List<Color>> mAllColors;
+    private FavoriteColorsDao dao;
+    private final LiveData<List<Color>> mAllColors;
 
     public ColorRepository(Application application) {
-        AppDatabase db = AppDatabase.getDatabase(application);
+        AppDatabase db = AppDatabase.getInstance(application);
         dao = db.dao();
-        mAllColors = dao.getAll();
+        mAllColors = dao.getAllColors();
     }
 
     public LiveData<List<Color>> getAllColors() {
@@ -23,14 +24,28 @@ public class ColorRepository {
 
     public void insert(Color color) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-                    insert(color);
+
+            AsyncTask.execute(
+                    () -> dao.insert(color)
+            );
+
+        });
+    }
+
+    public void update(Color color) {
+        AppDatabase.databaseWriteExecutor.execute(()-> {
+                    AsyncTask.execute(
+                            ()-> dao.update(color)
+                    );
                 }
         );
     }
 
     public void delete(Color color) {
         AppDatabase.databaseWriteExecutor.execute(() -> {
-            delete(color);
+            AsyncTask.execute(
+                    ()-> dao.delete(color)
+            );
         });
     }
 }

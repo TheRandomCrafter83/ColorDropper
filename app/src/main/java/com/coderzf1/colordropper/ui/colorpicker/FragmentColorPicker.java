@@ -29,6 +29,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.coderzf1.colordropper.R;
 import com.coderzf1.colordropper.databinding.FragmentColorPickerBinding;
@@ -95,7 +96,7 @@ public class FragmentColorPicker extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.println(Log.DEBUG, "onCreate", "onCreate Called");
-        viewModel = new ViewModelProvider(this).get(FragmentColorPickerViewModel.class);
+        viewModel = ViewModelProviders.of(this).get(FragmentColorPickerViewModel.class);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -202,7 +203,10 @@ public class FragmentColorPicker extends Fragment {
                 Toast.makeText(getContext(),"Copy",Toast.LENGTH_SHORT).show();
             }
             if(drawableIndex == 2){
-                Toast.makeText(getContext(),"Favorite",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(),"Favorite",Toast.LENGTH_SHORT).show();
+                com.coderzf1.colordropper.Database.Color color = new com.coderzf1.colordropper.Database.Color("Test",Color.RED);
+                Log.d("DebugDrawableClick", "onDrawableClick: " + color.toString());
+                viewModel.insert(color);
             }
         }
     };

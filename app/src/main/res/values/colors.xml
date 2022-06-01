@@ -8,5 +8,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
     <color name="workspace">#FF424242</color>
+    <color name="recycler_item_background">#B6B6B6</color>
     <color name="workspace_bottom">#FF303136</color>
 </resources>
