@@ -1,13 +1,13 @@
 package com.coderzf1.colordropper.ui.favoritecolor.adapters;
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.coderzf1.colordropper.Database.Color;
@@ -15,29 +15,50 @@ import com.coderzf1.colordropper.databinding.FavoriteColorsItemBinding;
 
 import java.util.List;
 
-public class FavoriteColorsAdapter extends RecyclerView.Adapter<FavoriteColorsAdapter.FavoriteColorsViewHolder> {
+public class FavoriteColorsAdapter extends ListAdapter<Color, FavoriteColorsAdapter.FavoriteColorsViewHolder> {
 
-    List<Color> items;
+    public interface FavoriteColorsAdapterItemClickListener{
+        void onItemClicked(int position);
+    }
 
+    private FavoriteColorsAdapterItemClickListener listener;
 
-
-    public static class FavoriteColorsViewHolder extends RecyclerView.ViewHolder{
+    class FavoriteColorsViewHolder extends RecyclerView.ViewHolder{
         private FavoriteColorsItemBinding binding;
         public FavoriteColorsViewHolder(FavoriteColorsItemBinding binding) {
             super(binding.getRoot());
+            View itemView = binding.getRoot();
+            final View.OnClickListener itemViewClick = new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = getAdapterPosition();
+                    if(listener != null && pos != RecyclerView.NO_POSITION) {
+                        listener.onItemClicked(pos);
+                    }
+                }
+            };
+            itemView.setOnClickListener(itemViewClick);
             this.binding = binding;
         }
 
     }
 
     public FavoriteColorsAdapter(){
-
+        super(DIFF_CALLBACK);
     }
 
-    public void setItems(List<Color> items){
-        this.items = items;
-        notifyDataSetChanged();
-    }
+    public static final DiffUtil.ItemCallback<Color> DIFF_CALLBACK = new DiffUtil.ItemCallback<Color>() {
+        @Override
+        public boolean areItemsTheSame(@NonNull Color oldItem, @NonNull Color newItem) {
+            return oldItem.getUid() == newItem.getUid();
+        }
+
+        @Override
+        public boolean areContentsTheSame(@NonNull Color oldItem, @NonNull Color newItem) {
+            return oldItem.getColorName().equals(newItem.getColorName()) &&
+                    oldItem.getColorValue() == newItem.getColorValue();
+        }
+    };
 
     @NonNull
     @Override
@@ -48,10 +69,18 @@ public class FavoriteColorsAdapter extends RecyclerView.Adapter<FavoriteColorsAd
 
     @Override
     public void onBindViewHolder(@NonNull FavoriteColorsViewHolder holder, int position) {
-        Color color = items.get(position);
+        Color color = getItem(position);
         holder.binding.textViewColorName.setText(color.getColorName());
         holder.binding.textViewHexValue.setText(String.valueOf(color.getColorValue()));
         holder.binding.surfaceViewColorPreview.setBackgroundTintList(getColorValue(color.getColorValue()));
+    }
+
+    public Color getColorAt(int position){
+        return getItem(position);
+    }
+
+    public void setItemClickListener(FavoriteColorsAdapterItemClickListener listener){
+        this.listener = listener;
     }
 
     private ColorStateList getColorValue(int color){
@@ -60,9 +89,4 @@ public class FavoriteColorsAdapter extends RecyclerView.Adapter<FavoriteColorsAd
         return new ColorStateList(states,colors);
     }
 
-    @Override
-    public int getItemCount() {
-        if (items == null) return 0;
-        return items.size();
-    }
 }

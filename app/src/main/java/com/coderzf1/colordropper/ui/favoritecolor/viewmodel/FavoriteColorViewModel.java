@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper.ui.favoritecolor;
+package com.coderzf1.colordropper.ui.favoritecolor.viewmodel;
 
 import android.app.Application;
 import android.util.Log;
@@ -23,7 +23,7 @@ public class FavoriteColorViewModel extends AndroidViewModel {
         mAllColors = mRepository.getAllColors();
     }
 
-    LiveData<List<Color>> getAllColors(){
+    public LiveData<List<Color>> getAllColors(){
         //Log.d("DebugColorsCount", "getAllColors: " + mAllColors.getValue().size());
         return mAllColors;
     }

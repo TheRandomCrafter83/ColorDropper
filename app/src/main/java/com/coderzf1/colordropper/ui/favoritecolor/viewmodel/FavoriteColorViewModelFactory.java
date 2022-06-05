@@ -1,11 +1,10 @@
-package com.coderzf1.colordropper.ui.favoritecolor;
+package com.coderzf1.colordropper.ui.favoritecolor.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.coderzf1.colordropper.Database.Color;
-import com.coderzf1.colordropper.Database.ColorRepository;
 
 import java.util.List;
 
