@@ -9,7 +9,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,8 +26,6 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.coderzf1.colordropper.R;
@@ -40,6 +37,7 @@ import com.coderzf1.colordropper.utils.ImageLoader;
 import java.io.File;
 
 
+@SuppressWarnings({"CanBeFinal", "unused"})
 public class FragmentColorPicker extends Fragment {
     FragmentColorPickerBinding binding;
     private FragmentColorPickerViewModel viewModel;
@@ -99,7 +97,7 @@ public class FragmentColorPicker extends Fragment {
         viewModel = ViewModelProviders.of(this).get(FragmentColorPickerViewModel.class);
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "UseCompatTextViewDrawableApis"})
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -119,23 +117,19 @@ public class FragmentColorPicker extends Fragment {
             loadBitmapFromUrl(url);
         });
         //viewModel.getPickedColor().observe(getViewLifecycleOwner(), pickedColor -> binding.textView.setText(pickedColor));
-        viewModel.getPickedColor().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @SuppressLint("UseCompatTextViewDrawableApis")
-            @Override
-            public void onChanged(String pickedColor) {
-                binding.textView.setText(pickedColor);
-                int color = Color.parseColor(pickedColor);
-                binding.textView.setTextColor(Utils.getContrastColor(color));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    int[][] states = new int[][]{
-                            new int[]{android.R.attr.state_enabled}
-                    };
-                    int[] colors = new int[]{Utils.getContrastColor(Color.parseColor(pickedColor))};
-                    ColorStateList compoundStateListColors = new ColorStateList(states, colors);
-                    binding.textView.setCompoundDrawableTintList(compoundStateListColors);
-                }
-                binding.cardviewColor.setCardBackgroundColor(Color.parseColor(pickedColor));
+        viewModel.getPickedColor().observe(getViewLifecycleOwner(), pickedColor -> {
+            binding.textView.setText(pickedColor);
+            int color = Color.parseColor(pickedColor);
+            binding.textView.setTextColor(Utils.getContrastColor(color));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                int[][] states = new int[][]{
+                        new int[]{android.R.attr.state_enabled}
+                };
+                int[] colors = new int[]{Utils.getContrastColor(Color.parseColor(pickedColor))};
+                ColorStateList compoundStateListColors = new ColorStateList(states, colors);
+                binding.textView.setCompoundDrawableTintList(compoundStateListColors);
             }
+            binding.cardviewColor.setCardBackgroundColor(Color.parseColor(pickedColor));
         });
         viewModel.setPickedColor("#FFFFFFFF");
         //Initialize OnClickListeners
@@ -204,8 +198,8 @@ public class FragmentColorPicker extends Fragment {
             }
             if(drawableIndex == 2){
 //                Toast.makeText(getContext(),"Favorite",Toast.LENGTH_SHORT).show();
-                com.coderzf1.colordropper.Database.Color color = new com.coderzf1.colordropper.Database.Color("Test",Color.RED);
-                Log.d("DebugDrawableClick", "onDrawableClick: " + color.toString());
+                com.coderzf1.colordropper.database.Color color = new com.coderzf1.colordropper.database.Color("Test",Color.RED);
+                Log.d("DebugDrawableClick", "onDrawableClick: " + color);
                 viewModel.insert(color);
             }
         }

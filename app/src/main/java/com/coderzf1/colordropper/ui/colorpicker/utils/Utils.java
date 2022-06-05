@@ -1,23 +1,15 @@
 package com.coderzf1.colordropper.ui.colorpicker.utils;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.os.Environment;
-import android.view.View;
-
-import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@SuppressWarnings({"CommentedOutCode", "unused"})
 public class Utils {
     public static int getContrastColor(int color) {
         double y = (299d * Color.red(color) + 587d * Color.green(color) + 114d * Color.blue(color)) / 1000d;
@@ -30,6 +22,7 @@ public class Utils {
         return File.createTempFile("JPEG_"+timeStamp+"_",".jpg",storageDir);
     }
 
+    /*
     public static Bitmap scaleImage(Bitmap bm, int newWidth, int newHeight)
     {
         if (bm == null) {
@@ -50,13 +43,6 @@ public class Utils {
         Bitmap scaledImage = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(scaledImage);
 
-//        //Draw background color
-//        Paint paint = new Paint();
-//        paint.setColor(Color.GRAY);
-//        paint.setStyle(Paint.Style.FILL);
-//        canvas.drawRect(0, 0, canvas.getWidth(),    canvas.getHeight(), paint);
-
-        //Determine the screen position
         float left = 0;
         float top = 0;
         if (width > height){
@@ -71,5 +57,6 @@ public class Utils {
         }
         return scaledImage;
     }
+    */
 
 }

@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper.Database;
+package com.coderzf1.colordropper.database;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

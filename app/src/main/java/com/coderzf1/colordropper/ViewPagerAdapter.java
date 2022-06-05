@@ -12,6 +12,7 @@ import com.coderzf1.colordropper.ui.favoritecolor.FragmentFavoriteColors;
 public class ViewPagerAdapter extends FragmentStateAdapter {
 
 
+    @SuppressWarnings("unused")
     public ViewPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);
     }

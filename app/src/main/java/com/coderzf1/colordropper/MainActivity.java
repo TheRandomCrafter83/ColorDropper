@@ -8,6 +8,7 @@ import androidx.core.content.res.ResourcesCompat;
 import com.coderzf1.colordropper.databinding.ActivityMainBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+@SuppressWarnings("unused")
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 

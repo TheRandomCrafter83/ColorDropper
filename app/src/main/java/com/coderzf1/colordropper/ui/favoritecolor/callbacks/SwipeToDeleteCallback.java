@@ -2,13 +2,10 @@ package com.coderzf1.colordropper.ui.favoritecolor.callbacks;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 
@@ -19,8 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coderzf1.colordropper.R;
 
+@SuppressWarnings("unused")
 abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback{
-    Context mContext;
+    final Context mContext;
     private final Paint mClearPaint;
     private final RectF backgroundRect;
     private final Paint backgroundPaint;
@@ -31,7 +29,6 @@ abstract public class SwipeToDeleteCallback extends ItemTouchHelper.Callback{
 
     public SwipeToDeleteCallback(Context context){
         this.mContext = context;
-
         backgroundRect = new RectF();
         backgroundPaint = new Paint();
         backgroundPaint.setAntiAlias(true);

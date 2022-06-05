@@ -14,16 +14,20 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.coderzf1.colordropper.Database.Color;
+import com.coderzf1.colordropper.database.Color;
 import com.coderzf1.colordropper.databinding.FragmentFavoriteColorsBinding;
 import com.coderzf1.colordropper.ui.favoritecolor.adapters.FavoriteColorsAdapter;
 import com.coderzf1.colordropper.ui.favoritecolor.callbacks.SwipeToDeleteCallback;
 import com.coderzf1.colordropper.ui.favoritecolor.viewmodel.FavoriteColorViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+@SuppressWarnings("unused")
 public class FragmentFavoriteColors extends Fragment {
     FavoriteColorViewModel model;
     FragmentFavoriteColorsBinding binding;
+    final private FavoriteColorsAdapter.FavoriteColorsAdapterItemClickListener itemTouchListener = position -> {
+
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,20 +50,14 @@ public class FragmentFavoriteColors extends Fragment {
 
                 Snackbar snackbar = Snackbar
                         .make(binding.recyclerView, "Item was removed from the list.", Snackbar.LENGTH_LONG);
-                snackbar.setAction("UNDO", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        model.insert(swipedColor);
-                        //adapter.restoreItem(adapter.getColorAt(position), viewHolder.getAdapterPosition());
-                        //binding.recyclerView.scrollToPosition(position);
-                    }
-                });
+                snackbar.setAction("UNDO", view -> model.insert(swipedColor));
 
                 snackbar.setActionTextColor(android.graphics.Color.YELLOW);
                 snackbar.show();
             }
         });
         itemTouchHelper.attachToRecyclerView(binding.recyclerView);
+        adapter.setItemClickListener(itemTouchListener);
         return binding.getRoot();
     }
 }

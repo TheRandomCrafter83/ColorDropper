@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
  * @see TextView#getCompoundDrawables()
  * @see TextView#setCompoundDrawablesRelativeWithIntrinsicBounds(int, int, int, int)
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("ALL")
 public abstract class CompoundDrawableTouchListener implements View.OnTouchListener {
 
     @SuppressWarnings("FieldCanBeLocal")
@@ -129,7 +129,7 @@ public abstract class CompoundDrawableTouchListener implements View.OnTouchListe
     /**
      * Compound drawable touch-event handler
      * @param v wrapping view
-     * @param drawableIndex index of compound drawable which recicved the event
+     * @param drawableIndex index of compound drawable which received the event
      * @param drawableBounds {@link Rect} with compound drawable bounds relative to wrapping view. Fuzz not included
      * @param event event with coordinated relative to wrapping view - i.e. within {@code drawableBounds}. If using fuzz, may return negative coordinates.
      */

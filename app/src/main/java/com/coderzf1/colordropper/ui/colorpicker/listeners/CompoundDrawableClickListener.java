@@ -1,7 +1,6 @@
 package com.coderzf1.colordropper.ui.colorpicker.listeners;
 
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import android.widget.TextView;
  * @see TextView#setCompoundDrawablesRelativeWithIntrinsicBounds(int, int, int, int)
  * @see CompoundDrawableTouchListener
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings("ALL")
 public abstract class CompoundDrawableClickListener extends CompoundDrawableTouchListener {
 
     /**
@@ -20,14 +19,6 @@ public abstract class CompoundDrawableClickListener extends CompoundDrawableTouc
      */
     public CompoundDrawableClickListener() {
         super();
-    }
-
-    /**
-     * Constructor with fuzz
-     * @param fuzz desired fuzz in px
-     */
-    public CompoundDrawableClickListener(int fuzz) {
-        super(fuzz);
     }
 
     @Override
@@ -39,7 +30,7 @@ public abstract class CompoundDrawableClickListener extends CompoundDrawableTouc
     /**
      * Compound drawable touch-event handler
      * @param v wrapping view
-     * @param drawableIndex index of compound drawable which recicved the event
+     * @param drawableIndex index of compound drawable which received the event
      */
     protected abstract void onDrawableClick(View v, int drawableIndex);
 }

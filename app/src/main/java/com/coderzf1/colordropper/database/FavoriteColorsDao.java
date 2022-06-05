@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper.Database;
+package com.coderzf1.colordropper.database;
 
 import androidx.room.Dao;
 import androidx.lifecycle.LiveData;
@@ -25,4 +25,5 @@ public interface FavoriteColorsDao {
 
     @Delete
     void delete(Color color);
+
 }

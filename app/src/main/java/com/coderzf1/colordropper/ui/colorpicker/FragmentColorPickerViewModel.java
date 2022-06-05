@@ -8,8 +8,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.coderzf1.colordropper.Database.Color;
-import com.coderzf1.colordropper.Database.ColorRepository;
+import com.coderzf1.colordropper.database.Color;
+import com.coderzf1.colordropper.database.ColorRepository;
 
 public class FragmentColorPickerViewModel extends AndroidViewModel {
     private final ColorRepository mRepository;
@@ -28,22 +28,22 @@ public class FragmentColorPickerViewModel extends AndroidViewModel {
         mRepository = new ColorRepository(application);
     }
 
+    @SuppressWarnings("unused")
     public LiveData<String> getPickedColor(){
         return pickedColor;
     }
 
+    @SuppressWarnings("unused")
     public void setPickedColor(String pickedColor){
         this.pickedColor.setValue(pickedColor);
     }
 
+    @SuppressWarnings("unused")
     public LiveData<String> getLoadedUrl() {
         return loadedUrl;
     }
 
-    public void setLoadedUrl(String loadedUrl) {
-        this.loadedUrl.setValue(loadedUrl);
-    }
-
+    @SuppressWarnings("unused")
     public LiveData<Uri> getLoadedImage() {
         return loadedImage;
     }
@@ -52,6 +52,7 @@ public class FragmentColorPickerViewModel extends AndroidViewModel {
         this.loadedImage.setValue(loadedImage);
     }
 
+    @SuppressWarnings("unused")
     public void insert(Color color){
         mRepository.insert(color);
     }

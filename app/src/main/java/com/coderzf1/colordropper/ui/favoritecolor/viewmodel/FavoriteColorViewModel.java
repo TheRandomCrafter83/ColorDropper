@@ -1,18 +1,17 @@
 package com.coderzf1.colordropper.ui.favoritecolor.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
-import com.coderzf1.colordropper.Database.Color;
-import com.coderzf1.colordropper.Database.ColorRepository;
+import com.coderzf1.colordropper.database.Color;
+import com.coderzf1.colordropper.database.ColorRepository;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class FavoriteColorViewModel extends AndroidViewModel {
     private final ColorRepository mRepository;
     private final LiveData<List<Color>> mAllColors;

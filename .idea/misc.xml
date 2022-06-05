@@ -17,6 +17,15 @@
       </map>
     </option>
   </component>
+  <component name="EntryPointsManager">
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="androidx.room.Query" />
+    </list>
+    <pattern value="com.coderzf1.colordropper.utils.ImageLoader" />
+    <pattern value="com.coderzf1.colordropper.utils.ImageLoader" method="ImageLoader" />
+    <pattern value="com.coderzf1.colordropper.utils.ImageLoader" method="loadImageFromUrl" />
+    <pattern value="com.coderzf1.colordropper.utils.ImageLoader" method="setImageLoaderListener" />
+  </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
     <option name="myDefaultNotNull" value="androidx.annotation.NonNull" />

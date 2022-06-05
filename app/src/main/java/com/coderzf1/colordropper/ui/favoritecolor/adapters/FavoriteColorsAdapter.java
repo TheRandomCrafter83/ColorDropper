@@ -10,11 +10,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.coderzf1.colordropper.Database.Color;
+import com.coderzf1.colordropper.database.Color;
 import com.coderzf1.colordropper.databinding.FavoriteColorsItemBinding;
 
-import java.util.List;
-
+@SuppressWarnings("ALL")
 public class FavoriteColorsAdapter extends ListAdapter<Color, FavoriteColorsAdapter.FavoriteColorsViewHolder> {
 
     public interface FavoriteColorsAdapterItemClickListener{
@@ -23,18 +22,16 @@ public class FavoriteColorsAdapter extends ListAdapter<Color, FavoriteColorsAdap
 
     private FavoriteColorsAdapterItemClickListener listener;
 
+    @SuppressWarnings("unused")
     class FavoriteColorsViewHolder extends RecyclerView.ViewHolder{
-        private FavoriteColorsItemBinding binding;
+        private final FavoriteColorsItemBinding binding;
         public FavoriteColorsViewHolder(FavoriteColorsItemBinding binding) {
             super(binding.getRoot());
             View itemView = binding.getRoot();
-            final View.OnClickListener itemViewClick = new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int pos = getAdapterPosition();
-                    if(listener != null && pos != RecyclerView.NO_POSITION) {
-                        listener.onItemClicked(pos);
-                    }
+            final View.OnClickListener itemViewClick = view -> {
+                int pos = getAdapterPosition();
+                if(listener != null && pos != RecyclerView.NO_POSITION) {
+                    listener.onItemClicked(pos);
                 }
             };
             itemView.setOnClickListener(itemViewClick);

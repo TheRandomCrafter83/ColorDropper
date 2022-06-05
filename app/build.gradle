@@ -24,9 +24,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+
+
     buildFeatures {
         viewBinding true
     }
+    namespace 'com.coderzf1.colordropper'
 }
 
 dependencies {
@@ -42,7 +46,7 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     annotationProcessor "android.arch.lifecycle:common-java8:1.1.1"
 
-    implementation "androidx.room:room-runtime:$room_version"
+    api "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
 
     implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
