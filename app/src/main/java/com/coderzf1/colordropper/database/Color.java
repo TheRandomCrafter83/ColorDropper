@@ -4,13 +4,13 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "favorite_colors")
+@Entity(tableName = "favoriteColors")
 public class Color {
     @PrimaryKey(autoGenerate = true)
     private int uid;
-    @ColumnInfo(name = "color_name")
+    @ColumnInfo(name = "colorName")
     private final String colorName;
-    @ColumnInfo(name="color_value")
+    @ColumnInfo(name="colorValue")
     private final int colorValue;
 
     public Color(String colorName, int colorValue) {

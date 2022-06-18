@@ -17,5 +17,15 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="mode_selection">Mode Selection</string>
+    <string name="browse_for_image">Browse For Image</string>
+    <string name="blank_image">Blank Image</string>
+    <string name="title_placeholder">Title Placeholder</string>
+    <string name="dialog_icon">Dialog Icon</string>
+    <string name="temporary_message">Temporary Message</string>
+    <string name="enter_your_input">Enter your input...</string>
+    <string name="input_dialog_default_text">Enter some text.</string>
+    <string name="favorites_list_is_empty">Favorites List Is Empty</string>
+    <string name="there_are_currently_no_favorite_colors_please_add_a_few">There are currently no favorite colors. Please add a few.</string>
+    <string name="there_is_no_image_loaded">There is no image loaded.</string>
 
 </resources>

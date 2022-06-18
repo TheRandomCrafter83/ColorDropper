@@ -38,6 +38,13 @@ public class FragmentFavoriteColors extends Fragment {
         binding.recyclerView.setAdapter(adapter);
         binding.recyclerView.setHasFixedSize(true);
         model.getAllColors().observe(getViewLifecycleOwner(), colors -> {
+            if(colors.isEmpty()){
+                binding.recyclerView.setVisibility(View.GONE);
+                binding.stateEmpty.getRoot().setVisibility(View.VISIBLE);
+                return;
+            }
+            binding.recyclerView.setVisibility(View.VISIBLE);
+            binding.stateEmpty.getRoot().setVisibility(View.GONE);
             Log.d("Debugging", "onCreateView: " + colors.size());
             adapter.submitList(colors);
         });

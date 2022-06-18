@@ -11,10 +11,10 @@ import java.util.List;
 
 @Dao
 public interface FavoriteColorsDao {
-    @Query("SELECT * FROM favorite_colors")
+    @Query("SELECT * FROM favoriteColors")
     LiveData<List<Color>> getAllColors();
 
-    @Query("SELECT * FROM favorite_colors WHERE color_name LIKE :colorName LIMIT 1")
+    @Query("SELECT * FROM favoriteColors WHERE colorName LIKE :colorName LIMIT 1")
     Color findByName(String colorName);
 
     @Update

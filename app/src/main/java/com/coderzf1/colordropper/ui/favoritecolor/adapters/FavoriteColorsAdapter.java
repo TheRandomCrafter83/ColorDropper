@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coderzf1.colordropper.database.Color;
 import com.coderzf1.colordropper.databinding.FavoriteColorsItemBinding;
+import com.coderzf1.colordropper.ui.favoritecolor.utils.Utils;
 
 @SuppressWarnings("ALL")
 public class FavoriteColorsAdapter extends ListAdapter<Color, FavoriteColorsAdapter.FavoriteColorsViewHolder> {
@@ -68,7 +69,7 @@ public class FavoriteColorsAdapter extends ListAdapter<Color, FavoriteColorsAdap
     public void onBindViewHolder(@NonNull FavoriteColorsViewHolder holder, int position) {
         Color color = getItem(position);
         holder.binding.textViewColorName.setText(color.getColorName());
-        holder.binding.textViewHexValue.setText(String.valueOf(color.getColorValue()));
+        holder.binding.textViewHexValue.setText(Utils.colorIntToHexString(color.getColorValue()));
         holder.binding.surfaceViewColorPreview.setBackgroundTintList(getColorValue(color.getColorValue()));
     }
 

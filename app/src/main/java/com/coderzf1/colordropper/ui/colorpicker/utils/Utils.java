@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Environment;
 
+import androidx.annotation.ColorInt;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -22,41 +24,12 @@ public class Utils {
         return File.createTempFile("JPEG_"+timeStamp+"_",".jpg",storageDir);
     }
 
-    /*
-    public static Bitmap scaleImage(Bitmap bm, int newWidth, int newHeight)
-    {
-        if (bm == null) {
-            return null;
-        }
-        int width = bm.getWidth();
-        int height = bm.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
+    public static String colorIntToHexString(@ColorInt int color){
+        int alpha = (color>>24)&0xFF;
+        int red = (color>>16)&0xFF;
+        int green = (color>>8)&0xFF;
+        int blue = (color)&0xFF;
+        return String.format("#%02x%02x%02x%02x",alpha,red,green,blue).toUpperCase();
 
-        //Keep aspect ratio scaling, mainly long edges
-        float scaleRatio = Math.min(scaleHeight, scaleWidth);
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleRatio, scaleRatio);
-        Bitmap newBm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
-
-        //Create target size bitmap
-        Bitmap scaledImage = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(scaledImage);
-
-        float left = 0;
-        float top = 0;
-        if (width > height){
-            top = (float)((newBm.getWidth() - newBm.getHeight()) / 2.0);
-        }
-        else{
-            left = (float)((newBm.getHeight() - newBm.getWidth()) / 2.0);
-        }
-        canvas.drawBitmap( newBm, left , top, null );
-        if (!bm.isRecycled()){
-            bm.recycle();
-        }
-        return scaledImage;
     }
-    */
-
 }

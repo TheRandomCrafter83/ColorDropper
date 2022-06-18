@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper.utils;
+package com.coderzf1.colordropper.ui.colorpicker.utils;
 
 import android.content.Context;
 import android.net.Uri;

@@ -1,4 +1,4 @@
-package com.coderzf1.colordropper.ui.colorpicker;
+package com.coderzf1.colordropper.ui.colorpicker.viewmodel;
 
 import android.app.Application;
 import android.net.Uri;
@@ -20,11 +20,15 @@ public class FragmentColorPickerViewModel extends AndroidViewModel {
 
     private final MutableLiveData<String> pickedColor;
 
+    private Integer pickedColorInt;
+
     public FragmentColorPickerViewModel(@NonNull Application application) {
         super(application);
         loadedImage = new MutableLiveData<>();
         loadedUrl = new MutableLiveData<>();
         pickedColor = new MutableLiveData<>();
+        pickedColor.setValue("#FFFFFFFF");
+        pickedColorInt = 0;
         mRepository = new ColorRepository(application);
     }
 
@@ -37,6 +41,10 @@ public class FragmentColorPickerViewModel extends AndroidViewModel {
     public void setPickedColor(String pickedColor){
         this.pickedColor.setValue(pickedColor);
     }
+
+    public Integer getPickedColorInt(){return pickedColorInt;}
+
+    public void setPickedColorInt(Integer pickedColor){this.pickedColorInt = pickedColor;}
 
     @SuppressWarnings("unused")
     public LiveData<String> getLoadedUrl() {

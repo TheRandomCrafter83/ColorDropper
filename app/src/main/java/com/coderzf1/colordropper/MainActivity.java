@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.coderzf1.colordropper.databinding.ActivityMainBinding;
+import com.coderzf1.colordropper.utils.Utils;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 @SuppressWarnings("unused")
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.toolbar.setTitleTextColor(ResourcesCompat.getColor(getResources(),R.color.yellow,null));
+        if(!Utils.isDarkMode(this)) {
+            binding.toolbar.setTitleTextColor(ResourcesCompat.getColor(getResources(), R.color.lightmode_primary_text, null));
+        }
         setSupportActionBar(binding.toolbar);
         initialize();
     }

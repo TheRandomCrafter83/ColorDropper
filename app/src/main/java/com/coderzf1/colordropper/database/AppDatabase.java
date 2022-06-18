@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = Color.class, version = 2)
+@Database(entities = Color.class, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract FavoriteColorsDao dao();
 
@@ -20,7 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
     public static synchronized AppDatabase getInstance(Context context){
         if(instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    AppDatabase.class, "color_database")
+                    AppDatabase.class, "colorDatabase")
                     .fallbackToDestructiveMigration()
                     .build();
         }

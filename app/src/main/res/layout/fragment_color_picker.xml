@@ -5,10 +5,8 @@
     android:id="@+id/mainContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/workspace"
-    tools:context=".ui.colorpicker.FragmentColorPicker">
 
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".ui.colorpicker.FragmentColorPicker">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -17,7 +15,7 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:indeterminateDrawable="@drawable/progress_drawable"
-        android:indeterminateTint="@color/yellow"
+
         android:progressTint="#57380B"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -32,7 +30,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-        android:contentDescription=""
+        android:contentDescription="@string/blank_image"
         app:layout_constraintBottom_toTopOf="@+id/iv_browse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +48,19 @@
         app:layout_constraintBottom_toTopOf="@+id/iv_browse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:focusable="true" />
+
+    <include
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/imageNoImageLoaded"
+        layout="@layout/state_no_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iv_browse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ImageButton
         android:id="@+id/iv_camera"
@@ -64,7 +74,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardview_color"
         app:layout_constraintEnd_toStartOf="@id/iv_browse"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/yellow" />
+        />
 
     <ImageButton
         android:id="@+id/iv_browse"
@@ -78,7 +88,7 @@
         app:layout_constraintBottom_toTopOf="@+id/cardview_color"
         app:layout_constraintEnd_toStartOf="@id/iv_web"
         app:layout_constraintStart_toEndOf="@+id/iv_camera"
-        app:tint="@color/yellow" />
+        />
 
     <ImageButton
         android:id="@+id/iv_web"
@@ -92,8 +102,10 @@
         app:layout_constraintBottom_toTopOf="@+id/cardview_color"
         app:layout_constraintEnd_toStartOf="@id/iv_screenshot"
         app:layout_constraintStart_toEndOf="@+id/iv_browse"
-        app:tint="@color/yellow" />
+        />
 
+
+<!--    To be implemented    -->
     <ImageButton
         android:id="@+id/iv_screenshot"
         android:layout_width="48dp"
@@ -106,7 +118,8 @@
         app:layout_constraintBottom_toTopOf="@+id/cardview_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_web"
-        app:tint="@color/yellow" />
+        android:visibility="gone"
+        />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardview_color"
@@ -115,13 +128,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:cardBackgroundColor="@color/white"
+        app:cardBackgroundColor="@android:color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/black"
+        app:strokeColor="@android:color/black"
         app:strokeWidth="2dp">
 
         <TextView
@@ -136,7 +149,8 @@
             app:drawableEndCompat="@drawable/ic_is_not_favorite"
             app:drawableStartCompat="@drawable/ic_copy"
             android:drawablePadding="16dp"
-            android:drawableTint="@color/workspace"
+            app:drawableTint="#2B2B2B"
+            android:enabled="false"
             />
 
     </com.google.android.material.card.MaterialCardView>

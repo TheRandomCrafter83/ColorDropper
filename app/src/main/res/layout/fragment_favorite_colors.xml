@@ -8,9 +8,14 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:background="@color/workspace"
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
 
+        <include
+            android:id="@+id/stateEmpty"
+            layout="@layout/state_empty_list"
+            android:visibility="gone"
+                />
 </FrameLayout>

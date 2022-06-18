@@ -32,9 +32,12 @@ import com.coderzf1.colordropper.R;
 import com.coderzf1.colordropper.databinding.FragmentColorPickerBinding;
 import com.coderzf1.colordropper.ui.colorpicker.listeners.CompoundDrawableClickListener;
 import com.coderzf1.colordropper.ui.colorpicker.utils.Utils;
-import com.coderzf1.colordropper.utils.ImageLoader;
+import com.coderzf1.colordropper.ui.colorpicker.utils.ImageLoader;
+import com.coderzf1.colordropper.ui.colorpicker.viewmodel.FragmentColorPickerViewModel;
+import com.coderzf1.colordropper.utils.InputDialog;
 
 import java.io.File;
+import java.util.Calendar;
 
 
 @SuppressWarnings({"CanBeFinal", "unused"})
@@ -103,7 +106,11 @@ public class FragmentColorPicker extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentColorPickerBinding.inflate(getLayoutInflater());
         viewModel.getLoadedImage().observe(getViewLifecycleOwner(), uri -> {
-            if (uri == null) return;
+            if (uri == null) {
+                binding.imageNoImageLoaded.getRoot().setVisibility(View.VISIBLE);
+                return;
+            }
+            binding.imageNoImageLoaded.getRoot().setVisibility(View.GONE);
             binding.imageView.setImageURI(uri);
             binding.imageView.setVisibility(View.VISIBLE);
             int w = binding.imagePlaceHolder.getWidth();
@@ -112,8 +119,14 @@ public class FragmentColorPicker extends Fragment {
             bitmapCanvasCanvas = new Canvas(bitmapCanvas);
         });
         viewModel.getLoadedUrl().observe(getViewLifecycleOwner(), url -> {
-            if (url == null) return;
-            if (url.isEmpty()) return;
+            if (url == null) {
+                binding.imageNoImageLoaded.getRoot().setVisibility(View.VISIBLE);
+                return;
+            }
+            if (url.isEmpty()) {
+                binding.imageNoImageLoaded.getRoot().setVisibility(View.VISIBLE);
+                return;
+            }
             loadBitmapFromUrl(url);
         });
         //viewModel.getPickedColor().observe(getViewLifecycleOwner(), pickedColor -> binding.textView.setText(pickedColor));
@@ -131,7 +144,6 @@ public class FragmentColorPicker extends Fragment {
             }
             binding.cardviewColor.setCardBackgroundColor(Color.parseColor(pickedColor));
         });
-        viewModel.setPickedColor("#FFFFFFFF");
         //Initialize OnClickListeners
         binding.ivBrowse.setOnClickListener(buttonBrowseListener);
         binding.ivCamera.setOnClickListener(buttonCameraListener);
@@ -185,22 +197,22 @@ public class FragmentColorPicker extends Fragment {
                 "Please enter the url to the image.",
                 "Color Dropper",
                 loadedUrl,
-                ContextCompat.getColor(requireActivity(), R.color.primary),
-                ContextCompat.getColor(requireActivity(), R.color.yellow)
+                ContextCompat.getColor(requireActivity(), android.R.color.background_light),
+                ContextCompat.getColor(requireActivity(), android.R.color.primary_text_light)
         );
     };
 
     private final CompoundDrawableClickListener textViewListener = new CompoundDrawableClickListener() {
         @Override
         protected void onDrawableClick(View v, int drawableIndex) {
+            if (!v.isEnabled()) return;
             if(drawableIndex == 0){
                 Toast.makeText(getContext(),"Copy",Toast.LENGTH_SHORT).show();
             }
             if(drawableIndex == 2){
-//                Toast.makeText(getContext(),"Favorite",Toast.LENGTH_SHORT).show();
-                com.coderzf1.colordropper.database.Color color = new com.coderzf1.colordropper.database.Color("Test",Color.RED);
-                Log.d("DebugDrawableClick", "onDrawableClick: " + color);
+                com.coderzf1.colordropper.database.Color color = new com.coderzf1.colordropper.database.Color("Untitled Color",viewModel.getPickedColorInt());
                 viewModel.insert(color);
+                binding.textView.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(requireContext(),R.drawable.ic_copy),null,ContextCompat.getDrawable(requireContext(),R.drawable.ic_is_favorite),null);
             }
         }
     };
@@ -210,6 +222,7 @@ public class FragmentColorPicker extends Fragment {
         @Override
         public boolean onTouch(View view, MotionEvent event) {
             if (event.getAction() == MotionEvent.ACTION_DOWN || event.getAction() == MotionEvent.ACTION_MOVE) {
+                binding.textView.setCompoundDrawablesWithIntrinsicBounds(ContextCompat.getDrawable(requireContext(),R.drawable.ic_copy),null,ContextCompat.getDrawable(requireContext(),R.drawable.ic_is_not_favorite),null);
                 binding.imageView.draw(bitmapCanvasCanvas);
                 int color;
 
@@ -238,23 +251,20 @@ public class FragmentColorPicker extends Fragment {
                     color = bitmapCanvas.getPixel(x, y);
                 }
 
-                //Show the color value
-                int a = Color.alpha(color);
-                int r = Color.red(color);
-                int g = Color.green(color);
-                int b = Color.blue(color);
-                String hex = String.format("#%02x%02x%02x%02x",a , r, g, b);
-                viewModel.setPickedColor(hex.toUpperCase());
-                binding.textView.setTextColor(Utils.getContrastColor(Color.parseColor(hex)));
+
+                viewModel.setPickedColor(Utils.colorIntToHexString(color));
+                viewModel.setPickedColorInt(color);
+                binding.textView.setEnabled(true);
+                binding.textView.setTextColor(Utils.getContrastColor(color));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     int[][] states = new int[][]{
                             new int[]{android.R.attr.state_enabled}
                     };
-                    int[] colors = new int[]{Utils.getContrastColor(Color.parseColor(hex))};
+                    int[] colors = new int[]{Utils.getContrastColor(color)};
                     ColorStateList compoundStateListColors = new ColorStateList(states, colors);
                     binding.textView.setCompoundDrawableTintList(compoundStateListColors);
                 }
-                binding.cardviewColor.setCardBackgroundColor(Color.parseColor(hex));
+                binding.cardviewColor.setCardBackgroundColor(color);
                 return true;
             } else if (event.getAction() == MotionEvent.ACTION_UP) {
                 view.performClick();
@@ -308,7 +318,9 @@ public class FragmentColorPicker extends Fragment {
             @Override
             public void onImageLoaded(Uri uri) {
                 viewModel.setLoadedImage(uri);
+                binding.imageNoImageLoaded.getRoot().setVisibility(View.GONE);
                 binding.progressBar.setVisibility(View.GONE);
+
             }
 
             @Override

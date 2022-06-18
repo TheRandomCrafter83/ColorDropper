@@ -2,21 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.ColorDropper" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/lightmode_primary</item>
-        <item name="colorPrimaryVariant">@color/lightmode_variant</item>
-        <item name="colorOnPrimary">@color/lightmode_primary_text</item>
-        <item name="colorSurface">@color/lightmode_surface</item>
-        <item name="android:windowBackground">@color/lightmode_window_background</item>
-        <item name="tabTextColor">@color/lightmode_tab_text</item>
+        <item name="colorPrimary">@color/darkmode_primary</item>
+        <item name="colorPrimaryVariant">@color/darkmode_variant</item>
+        <item name="colorOnPrimary">@color/darkmode_primary_text</item>
+        <item name="colorSurface">@color/darkmode_surface</item>
+        <item name="android:windowBackground">@color/darkmode_window_background</item>
         <item name="tabIndicatorColor">@color/lightmode_tab_indicator</item>
-
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <item name="android:navigationBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
-
-    <style name="Theme.ColorDropper.Tab">
-
     </style>
 </resources>
